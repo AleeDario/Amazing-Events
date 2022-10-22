@@ -21,12 +21,9 @@ async function getFullEvents(){
   const eventsData = eventsJson.events
 
   // Card filtering and mapping
-  var eventsComplete = eventsData.map((element) => element)
+  const eventsComplete = eventsData.map((element) => element)
   
-
-}
-
-const eventsHome = eventsComplete.filter(() => title.text.includes('Home'))
+  const eventsHome = eventsComplete.filter(() => title.text.includes('Home'))
   const eventsUpcoming = eventsComplete.filter(() => title.text.includes('Upcoming')).filter(element => element.date > date)
   const eventsPast = eventsComplete.filter(() => title.text.includes('Past')).filter(element => element.date < date)
 
@@ -63,6 +60,8 @@ const eventsHome = eventsComplete.filter(() => title.text.includes('Home'))
     }
     return array
   }
+
+}
 
 function createCheckbox(category) {
       containerCheckbox.innerHTML += `
