@@ -100,7 +100,7 @@ function createCard(array) {
     <div class="card-body d-flex flex-column justify-content-between">
       <h5 class="card-title">${array.name}</h5>
       <p class="card-text">${array.description}</p>
-      <div class="d-flex justify-content-between align-items-center">
+      <div class="d-flex justify-content-between align-items-center gap-5">
         <p>Price: $${array.price}</p>
         <a href="../pages/details.html?id=${array._id}" " class="btn btn-primary detailsClass">More details</a>
       </div>

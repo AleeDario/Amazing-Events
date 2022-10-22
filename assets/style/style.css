@@ -122,7 +122,7 @@ input:focus{
 
 .card{
     width: 18em;
-    height: 21em;
+    height: 24em;
     border: 2px solid rgba(218,0,104,255);
     border-radius: 0 2em;
 }
