@@ -4,25 +4,65 @@ const containerCards = document.getElementById("cards-container");
 const title = document.getElementById("title");
 const searchId = document.getElementById("searchId");
 
+async function getFullEvents(){
 
-// Obtaining event data
-const date = amazingEvents.currentDate
-const eventsData = amazingEvents.events
+  try{
 
-// Card filtering and mapping
-const eventsComplete = eventsData.map((element) => element)
+    var eventsJson = await fetch('https://amazing-events.herokuapp.com/api/events')
+    eventsJson = await eventsJson.json()
+
+  }catch(error){
+    console.log(error)
+  }
+
+  // Obtaining event data
+    
+  const date = eventsJson.currentDate
+  const eventsData = eventsJson.events
+
+  // Card filtering and mapping
+  var eventsComplete = eventsData.map((element) => element)
+  
+
+}
+
 const eventsHome = eventsComplete.filter(() => title.text.includes('Home'))
-const eventsUpcoming = eventsComplete.filter(() => title.text.includes('Upcoming')).filter(element => element.date > date)
-const eventsPast = eventsComplete.filter(() => title.text.includes('Past')).filter(element => element.date < date)
+  const eventsUpcoming = eventsComplete.filter(() => title.text.includes('Upcoming')).filter(element => element.date > date)
+  const eventsPast = eventsComplete.filter(() => title.text.includes('Past')).filter(element => element.date < date)
 
-let fullEvents = [...eventsHome, ...eventsUpcoming, ...eventsPast]
-fullEvents.forEach(createCard)
+  let fullEvents = [...eventsHome, ...eventsUpcoming, ...eventsPast]
+  fullEvents.forEach(createCard)
 
-// Categorys filtering and mapping checkbox
+  // Categorys filtering and mapping checkbox
 
-const categorys = eventsComplete.reduce((allCategory, event) => Array.from(new Set([...allCategory,event.category])), [])
+  const categorys = eventsComplete.reduce((allCategory, event) => Array.from(new Set([...allCategory,event.category])), [])
 
-categorys.forEach(createCheckbox)
+  categorys.forEach(createCheckbox)
+
+  // Obtaining checksbox data and search data and filtering
+
+  let checkBoxId = Array.from(document.querySelectorAll('.checkId'))
+  checkBoxId.forEach(checkbox => checkbox.addEventListener("click", filterCheckCards))
+
+  searchId.addEventListener('input', filterCheckCards)
+
+  function filterCheckCards(){
+    let filteredChecks = checkEvents(fullEvents)
+    let filteredSearch = filterCardsBySearch(filteredChecks, searchId.value)
+    if (filteredSearch.length !== 0 ){
+      containerCards.innerHTML = ``
+    }
+    filteredSearch.forEach(createCard)
+  }
+
+  function checkEvents(array){
+    let checkboxChecked = checkBoxId.filter(check => check.checked).map(checkCategory => checkCategory.value)
+    if (checkboxChecked.length > 0 ){
+        let filteredCheckBox = array.filter(event => checkboxChecked.includes(event.category))
+        return filteredCheckBox
+    }
+    return array
+  }
 
 function createCheckbox(category) {
       containerCheckbox.innerHTML += `
@@ -30,31 +70,6 @@ function createCheckbox(category) {
         <label class="form-check-label text-white"><input type="checkbox" value="${category}" class="form-check-input checkId" id="${category}">${category}</label>
       </div>
       `
-}
-
-// Obtaining checksbox data and search data and filtering
-
-let checkBoxId = Array.from(document.querySelectorAll('.checkId'))
-checkBoxId.forEach(checkbox => checkbox.addEventListener("click", filterCheckCards))
-
-searchId.addEventListener('input', filterCheckCards)
-
-function filterCheckCards(){
-    let filteredChecks = checkEvents(fullEvents)
-    let filteredSearch = filterCardsBySearch(filteredChecks, searchId.value)
-    if (filteredSearch.length !== 0 ){
-      containerCards.innerHTML = ``
-    }
-    filteredSearch.forEach(createCard)
-}
-
-function checkEvents(array){
-  let checkboxChecked = checkBoxId.filter(check => check.checked).map(checkCategory => checkCategory.value)
-  if (checkboxChecked.length > 0 ){
-      let filteredCheckBox = array.filter(event => checkboxChecked.includes(event.category))
-      return filteredCheckBox
-  }
-  return array
 }
 
 function filterCardsBySearch(array,texto){
@@ -95,3 +110,5 @@ function createCard(array) {
     `;
 }
 
+
+getFullEvents()
