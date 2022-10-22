@@ -94,6 +94,12 @@ function searchEmpty() {
 // Create Card
 
 function createCard(array) {
+  let url
+  if(title.text.includes('Home')){
+    url = `./pages/details.html`
+  }else{
+    url = `./details.html`
+  }
   containerCards.innerHTML += `
     <article class="card bg-dark text-white">
     <img src="${array.image}" class="card-img-top" alt="${array.name}">
@@ -102,7 +108,7 @@ function createCard(array) {
       <p class="card-text">${array.description}</p>
       <div class="d-flex justify-content-between align-items-center gap-5">
         <p>Price: $${array.price}</p>
-        <a href="../../pages/details.html?id=${array._id}" " class="btn btn-primary detailsClass">More details</a>
+        <a href="${url}?id=${array._id}" " class="btn btn-primary detailsClass">More details</a>
       </div>
     </div>
     </article>
