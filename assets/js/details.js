@@ -5,14 +5,14 @@ async function detailsId(){
   let id = location.search.slice(4)
 
   try{
-    var detailsJson = await fetch(`https://amazing-events.herokuapp.com/api/events`)
+    var detailsJson = await fetch(`https://mind-hub.up.railway.app/amazing`)
     detailsJson = await detailsJson.json()
   }catch(error){
     console.log(error)
   }
 
   let eventsData = detailsJson.events
-  let eventDetails = eventsData.filter(event => id == event._id)
+  let eventDetails = eventsData.filter(event => id == event.id)
   eventDetails = eventDetails[0]
   createCardDetail(eventDetails)
 

@@ -8,7 +8,7 @@ async function getFullEvents(){
 
   try{
 
-    var eventsJson = await fetch('https://amazing-events.herokuapp.com/api/events')
+    var eventsJson = await fetch('https://mind-hub.up.railway.app/amazing')
     eventsJson = await eventsJson.json()
 
   }catch(error){
@@ -17,7 +17,7 @@ async function getFullEvents(){
 
   // Obtaining event data
     
-  const date = eventsJson.currentDate
+  const date = eventsJson.date
   const eventsData = eventsJson.events
 
   // Card filtering and mapping
@@ -108,7 +108,7 @@ function createCard(array) {
       <p class="card-text">${array.description}</p>
       <div class="d-flex justify-content-between align-items-center gap-5">
         <p>Price: $${array.price}</p>
-        <a href="${url}?id=${array._id}" " class="btn btn-primary detailsClass">More details</a>
+        <a href="${url}?id=${array.id}" " class="btn btn-primary detailsClass">More details</a>
       </div>
     </div>
     </article>
