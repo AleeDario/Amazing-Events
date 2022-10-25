@@ -30,54 +30,31 @@ async function statsId() {
 
     let eventsFilteringUpcoming = categoryUpcoming.map(category => {
         let eventsUp = eventsUpcoming.filter(event => event.category === category)
-        return filterUp(eventsUp)
-    }).forEach(createStatsUpcoming)
+        return filter(eventsUp, 'estimate')
+    }).forEach(array => createStats(array,tBodyUpcoming))
     
     let eventsFilteringPast = categoryPast.map(category => {
         let eventsPasted = eventsPast.filter(event => event.category === category)
-        return filterPast(eventsPasted)
-        }).forEach(createStatsPast)
+        return filter(eventsPasted, 'assistance')
+        }).forEach(array => createStats(array,tBodyPast))
 
-    function filterPast(eventsPast){
-
-        let categorysData = {
-            category: "",
-            earnings: 0,
-            capacity: 0,
-            assistance: 0
-        }
-        let stats = eventsPast.reduce((event1,event2) => {
-            return {
-                category: event2.category,
-                earnings: event1.earnings + event2.earnings,
-                capacity: event1.capacity + event2.capacity,
-                assistance: event1.assistance + event2.assistance
-            }
-        }, categorysData)
-        stats.percentage = (100 * stats.assistance / stats.capacity).toFixed(1)
-        return stats
-
-    }
-
-    function filterUp(eventsUp){
+    function filter(events,property){
 
         let categorysData = {
             category: "",
             earnings: 0,
             capacity: 0,
-            estimate: 0,
+            [property]: 0
         }
-        
-        let stats = eventsUp.reduce((event1,event2) => {
+        let stats = events.reduce((event1,event2) => {
             return {
                 category: event2.category,
                 earnings: event1.earnings + event2.earnings,
                 capacity: event1.capacity + event2.capacity,
-                estimate: event1.estimate + event2.estimate
+                [property]: event1[property] + event2[property]
             }
         }, categorysData)
-        stats.percentage = (100 * stats.estimate / stats.capacity).toFixed(1)
-
+        stats.percentage = (100 * stats[property] / stats.capacity).toFixed(1)
         return stats
 
     }
@@ -105,23 +82,12 @@ function createStatsGeneral(eventsGeneral) {
     `
 }
 
-function createStatsUpcoming(category) {
-    tBodyUpcoming.innerHTML +=
+function createStats(category,container) {
+    container.innerHTML +=
     `
     <tr>
         <td class="text-light fw-semibold">${category.category}</td></td>
-        <td class="text-light fw-semibold">$${category.earnings}</td>
-        <td class="text-light fw-semibold">${category.percentage}%</td>
-    </tr>
-    `
-}
-
-function createStatsPast(category) {
-    tBodyPast.innerHTML +=
-    `
-    <tr>
-        <td class="text-light fw-semibold">${category.category}</td></td>
-        <td class="text-light fw-semibold">$${category.earnings}</td>
+        <td class="text-light fw-semibold">$${category.earnings.toLocaleString("de-DE")}</td>
         <td class="text-light fw-semibold">${category.percentage}%</td>
     </tr>
     `
