@@ -8,7 +8,7 @@ async function getFullEvents(){
 
   try{
 
-    var eventsJson = await fetch('https://mind-hub.up.railway.app/amazing')
+    var eventsJson = await fetch('https://mh-amazing.herokuapp.com/amazing')
     eventsJson = await eventsJson.json()
 
   }catch(error){
