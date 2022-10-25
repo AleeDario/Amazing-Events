@@ -73,9 +73,8 @@ body{
     width: 50%;
 }
 
-input{
+input, textarea{
     max-width: 20em;
-    height: 2.5em;
     outline: none;
     border: 2px solid #000000;
     border-radius: 4px;
@@ -159,6 +158,11 @@ input:focus{
 
 .table-stats th{
     background-color: rgba(218,0,104,.6);
+}
+
+.message-input{
+    min-height: 10em;
+    min-width: 20em
 }
 
 .footer-container{

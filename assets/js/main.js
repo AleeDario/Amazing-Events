@@ -80,13 +80,26 @@ function filterCardsBySearch(array,texto){
   return cardsFilterForSearch
 }
 
+let url
+if(title.text.includes('Home')){
+  url = {
+    details: `./pages/details.html`,
+    img404: `./assets/img/404.png`,
+  }
+}else{
+  url = {
+    details: `./details.html`,
+    img404: `../assets/img/404.png`,
+  }
+}
+
 // Create empty article
 
 function searchEmpty() {
   containerCards.innerHTML = `
   <article class="text-white d-flex flex-column justify-content-center align-items-center gap-3 empty"">
     <h2 class="text-info">No results were found that match your search</h2>
-    <div><img class="img-fluid" src="../assets/img/404.png" alt="error" width="300px"></div>
+    <div><img class="img-fluid" src="${url.img404}" alt="error" width="300px"></div>
   </article>
   `;
 }
@@ -94,12 +107,6 @@ function searchEmpty() {
 // Create Card
 
 function createCard(array) {
-  let url
-  if(title.text.includes('Home')){
-    url = `./pages/details.html`
-  }else{
-    url = `./details.html`
-  }
   containerCards.innerHTML += `
     <article class="card bg-dark text-white">
     <img src="${array.image}" class="card-img-top" alt="${array.name}">
@@ -108,7 +115,7 @@ function createCard(array) {
       <p class="card-text">${array.description}</p>
       <div class="d-flex justify-content-between align-items-center gap-5">
         <p>Price: $${array.price}</p>
-        <a href="${url}?id=${array.id}" " class="btn btn-primary detailsClass">More details</a>
+        <a href="${url.details}?id=${array.id}" " class="btn btn-primary detailsClass">More details</a>
       </div>
     </div>
     </article>
