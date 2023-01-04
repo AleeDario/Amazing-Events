@@ -37,6 +37,28 @@ body{
     width: 90%;
     justify-content: center;
     gap: 4em;
+    min-height: 24.7em;
+}
+
+#checkbox-container{
+    width: 75vw;
+}
+
+.search-container{
+    width: 15em;
+}
+
+#searchId{
+    height: 2.2em;
+}
+
+.empty{
+    height: 330px;
+    padding: 2em;
+    background-color: rgba(0, 0, 0, .7);
+    border-top: solid .2em rgba(218,0,104,255);
+    border-bottom: solid .2em rgba(218,0,104,255);
+    border-radius: 1em 0;
 }
 
 .form-contact{
@@ -45,6 +67,23 @@ body{
 
 .txt-contact{
     color: rgba(218,0,104,255);
+}
+
+.message{
+    width: 50%;
+}
+
+input, textarea{
+    max-width: 20em;
+    outline: none;
+    border: 2px solid #000000;
+    border-radius: 4px;
+    font-size: 16px;
+    padding-left: 15px;
+}
+
+input:focus{  
+    border: 2px solid #1a73e8; 
 }
 
 .btn-contact{
@@ -82,9 +121,13 @@ body{
 
 .card{
     width: 18em;
-    height: 21em;
+    height: 24em;
     border: 2px solid rgba(218,0,104,255);
     border-radius: 0 2em;
+}
+
+.card:hover{
+    transform: scale(1.05);
 }
 
 .card-img-top{
@@ -117,7 +160,13 @@ body{
     background-color: rgba(218,0,104,.6);
 }
 
+.message-input{
+    min-height: 10em;
+    min-width: 20em
+}
+
 .footer-container{
+    width: 100%;
     background-color: black;
 }
 
@@ -160,6 +209,13 @@ body{
         width: 100%;
         border-radius: 0 2em 0 0;
         height: 300px;
+    }
+    
+}
+
+@media screen and ( max-width: 340px){
+    .card-text{
+        font-size: .8rem;
     }
     
 }

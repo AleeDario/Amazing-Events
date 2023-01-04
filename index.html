@@ -10,13 +10,13 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <link rel="stylesheet" href="./assets/style/style.css">
-  <title>Amazing Events - Home</title>
+  <title id="title">Amazing Events - Home</title>
 </head>
 
 <body class="full-container">
   <header class="header-container d-flex justify-content-between">
     <div class="w-50">
-      <img src="./assets/img/Logo_Amazing_Events.svg" alt="Logo Amazing Events" class="img-logo">
+      <a href=""><img src="./assets/img/Logo_Amazing_Events.svg" alt="Logo Amazing Events" class="img-logo"></a>
     </div>
     <nav class="navbar navbar-expand-lg navbar-dark">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -46,37 +46,12 @@
   <main class="full-container-fluid d-flex flex-column justify-content-center align-items-center">
     <div class="d-flex category">
       <div class="bg-dark p-4 w-100 category-son">
-        <form class="d-flex justify-content-around flex-wrap gap-4">
-          <div class="form-check">
-            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-            <label class="form-check-label text-white" for="exampleCheck1">Check me out</label>
+        <form class="d-flex flex-wrap justify-content-around w-100 gap-4" >
+          <div class="d-flex flex-wrap gap-4 justify-content-around" id="checkbox-container" >
+            <!-- ACA VAN LOS CHECKBOX -->
           </div>
-          <div class="form-check">
-            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-            <label class="form-check-label text-white" for="exampleCheck1">Check me out</label>
-          </div>
-          <div class="form-check">
-            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-            <label class="form-check-label text-white" for="exampleCheck1">Check me out</label>
-          </div>
-          <div class="form-check">
-            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-            <label class="form-check-label text-white" for="exampleCheck1">Check me out</label>
-          </div>
-          <div class="form-check">
-            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-            <label class="form-check-label text-white" for="exampleCheck1">Check me out</label>
-          </div>
-          <div class="d-flex" role="search">
-            <input class="form-control me-2 w-75 input-search" type="search" placeholder="Search" aria-label="Buscar">
-            <button class="btn-search" type="submit"><span class="input-group-text" id="basic-addon1">
-                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="10" fill="currentColor" class="bi bi-search"
-                  viewBox="0 0 16 16">
-                  <path
-                    d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z">
-                  </path>
-                </svg>
-              </span></button>
+          <div class="d-flex search-container" role="search">
+            <input id="searchId" class="form-control me-2 searchId" type="search" placeholder="Search" aria-label="Buscar">
           </div>
         </form>
       </div>
@@ -99,8 +74,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
     crossorigin="anonymous"></script>
-    <script src="./assets/js/data.js"></script>
-    <script src="./assets/js/home.js"></script>
+    <script src="./assets/js/main.js"></script>
 </body>
 
 </html>
