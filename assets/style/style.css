@@ -40,6 +40,10 @@ body{
     min-height: 24.7em;
 }
 
+#details-container{
+    min-height: 31.75em;
+}
+
 #checkbox-container{
     width: 75vw;
 }

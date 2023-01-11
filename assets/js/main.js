@@ -4,35 +4,34 @@ const containerCards = document.getElementById("cards-container");
 const title = document.getElementById("title");
 const searchId = document.getElementById("searchId");
 
-async function getFullEvents(){
+async function getFullEvents() {
 
-  try{
+  try {
 
-    var eventsJson = await fetch('https://mh-amazing.herokuapp.com/amazing')
-    eventsJson = await eventsJson.json()
+    var eventsData = await fetch('https://63bec0a6f5cfc0949b601cc9.mockapi.io/mindhub/amazing-events')
+    eventsData = await eventsData.json()
 
-  }catch(error){
+  } catch (error) {
     console.log(error)
   }
 
   // Obtaining event data
-    
-  const date = eventsJson.date
-  const eventsData = eventsJson.events
+
+  const date = '2022-01-01'
 
   // Card filtering and mapping
   const eventsComplete = eventsData.map((element) => element)
-  
+
   const eventsHome = eventsComplete.filter(() => title.text.includes('Home'))
   const eventsUpcoming = eventsComplete.filter(() => title.text.includes('Upcoming')).filter(element => element.date > date)
   const eventsPast = eventsComplete.filter(() => title.text.includes('Past')).filter(element => element.date < date)
 
   let fullEvents = [...eventsHome, ...eventsUpcoming, ...eventsPast]
-  fullEvents.forEach(createCard)
+    fullEvents.forEach(createCard)
 
   // Categorys filtering and mapping checkbox
 
-  const categorys = eventsComplete.reduce((allCategory, event) => Array.from(new Set([...allCategory,event.category])), [])
+  const categorys = eventsComplete.reduce((allCategory, event) => Array.from(new Set([...allCategory, event.category])), [])
 
   categorys.forEach(createCheckbox)
 
@@ -43,20 +42,20 @@ async function getFullEvents(){
 
   searchId.addEventListener('input', filterCheckCards)
 
-  function filterCheckCards(){
+  function filterCheckCards() {
     let filteredChecks = checkEvents(fullEvents)
     let filteredSearch = filterCardsBySearch(filteredChecks, searchId.value)
-    if (filteredSearch.length !== 0 ){
+    if (filteredSearch.length !== 0) {
       containerCards.innerHTML = ``
     }
     filteredSearch.forEach(createCard)
   }
 
-  function checkEvents(array){
+  function checkEvents(array) {
     let checkboxChecked = checkBoxId.filter(check => check.checked).map(checkCategory => checkCategory.value)
-    if (checkboxChecked.length > 0 ){
-        let filteredCheckBox = array.filter(event => checkboxChecked.includes(event.category))
-        return filteredCheckBox
+    if (checkboxChecked.length > 0) {
+      let filteredCheckBox = array.filter(event => checkboxChecked.includes(event.category))
+      return filteredCheckBox
     }
     return array
   }
@@ -64,29 +63,29 @@ async function getFullEvents(){
 }
 
 function createCheckbox(category) {
-      containerCheckbox.innerHTML += `
+  containerCheckbox.innerHTML += `
       <div class="form-check">
         <label class="form-check-label text-white"><input type="checkbox" value="${category}" class="form-check-input checkId" id="${category}">${category}</label>
       </div>
       `
 }
 
-function filterCardsBySearch(array,texto){
+function filterCardsBySearch(array, texto) {
   let cardsFilterForSearch = array.filter(event => event.name.toLowerCase().includes(texto.toLowerCase()));
-  if(cardsFilterForSearch.length === 0){
-      searchEmpty()
-      return []
-  } 
+  if (cardsFilterForSearch.length === 0) {
+    searchEmpty()
+    return []
+  }
   return cardsFilterForSearch
 }
 
 let url
-if(title.text.includes('Home')){
+if (title.text.includes('Home')) {
   url = {
     details: `./pages/details.html`,
     img404: `./assets/img/404.png`,
   }
-}else{
+} else {
   url = {
     details: `./details.html`,
     img404: `../assets/img/404.png`,
@@ -115,7 +114,7 @@ function createCard(array) {
       <p class="card-text">${array.description}</p>
       <div class="d-flex justify-content-between align-items-center gap-5">
         <p>Price: $${array.price}</p>
-        <a href="${url.details}?id=${array.id}" " class="btn btn-primary detailsClass">More details</a>
+        <a href="${url.details}?id=${array._id}" " class="btn btn-primary detailsClass">More details</a>
       </div>
     </div>
     </article>

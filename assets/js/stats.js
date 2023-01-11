@@ -4,14 +4,13 @@ const tBodyPast = document.getElementById("tbody-past");
 
 async function statsId() {
     try {
-        var eventsJson = await fetch(`https://mh-amazing.herokuapp.com/amazing`)
-        eventsJson = await eventsJson.json()
+        var eventsData = await fetch(`https://63bec0a6f5cfc0949b601cc9.mockapi.io/mindhub/amazing-events`)
+        eventsData = await eventsData.json()
     } catch (error) {
         console.log(error)
     }
 
-    let eventsData = eventsJson.events
-    let date = eventsJson.date
+    const date = '2022-01-01'
 
     eventsData.map(event => {
         if(event.assistance !== undefined){
@@ -28,12 +27,12 @@ async function statsId() {
     let categoryUpcoming = [...new Set(eventsUpcoming.map(event => event.category))]
     let categoryPast = [...new Set(eventsPast.map(event => event.category))]
 
-    let eventsFilteringUpcoming = categoryUpcoming.map(category => {
+    categoryUpcoming.map(category => {
         let eventsUp = eventsUpcoming.filter(event => event.category === category)
         return filter(eventsUp, 'estimate')
     }).forEach(array => createStats(array,tBodyUpcoming))
     
-    let eventsFilteringPast = categoryPast.map(category => {
+    categoryPast.map(category => {
         let eventsPasted = eventsPast.filter(event => event.category === category)
         return filter(eventsPasted, 'assistance')
         }).forEach(array => createStats(array,tBodyPast))
@@ -61,7 +60,7 @@ async function statsId() {
 
     let eventsAssistance = eventsData.filter(event => event.assistance !== undefined).sort((a, b) => a.percentage - b.percentage)
 
-    let eventosCapacity = eventsData.filter(event => event.capacity > 0).sort((a, b) => b.capacity - a.capacity)
+    let eventosCapacity = eventsData.sort((a, b) => b.capacity - a.capacity)
 
     let eventosAssAndCap = [eventsAssistance, eventosCapacity]
     
